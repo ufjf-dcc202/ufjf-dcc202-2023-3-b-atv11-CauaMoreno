@@ -1,17 +1,31 @@
+import {adicionaNaLista, getLista} from "./src/lista.js";
+
 const pEntrada = document.querySelector("#entrada");
 const btnAdicionar = document.querySelector("#adicionar");
 const btnLimpar = document.querySelector("#limpar");
 const olItens = document.querySelector("#itens");
 
+atualizarListaOrdenada();
 
-const li = document.createElement("li");
-li.textContent = "Primeiro";
-olItens.appendChild(li);
+btnAdicionar.addEventListener('click', adicionaItemDaEntrada);
 
-const li2 = document.createElement("li");
-li2.textContent = "Segundo";
-olItens.appendChild(li2);
+function adicionaItemDaEntrada(){
+    const valor = pEntrada.textContent;
+    adicionaNaLista(valor);
+    pEntrada.textContent = "";
+    atualizarListaOrdenada();
+}
 
-const li3 = document.createElement("li");
-li3.textContent = "Terceiro";
-olItens.appendChild(li3);
+function atualizarListaOrdenada(){
+    const lista = getLista();
+    olItens.innerHTML = "";
+    for(let i = 0; i < lista.length; i++){
+        adicionaElementoNaListaOrdenada(lista[i]);
+    }
+}
+function adicionaElementoNaListaOrdenada(texto)
+{
+    const li = document.createElement("li");
+    li.textContent = texto;
+    olItens.appendChild(li);
+}
